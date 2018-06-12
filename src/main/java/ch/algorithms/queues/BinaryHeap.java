@@ -9,7 +9,6 @@ public class BinaryHeap<Key> implements Iterable<Key> {
     private int n;
     private Comparator<Key> comparator;
 
-
     public BinaryHeap(int capacity) {
         pq = (Key[]) new Object[capacity + 1];
         n = 0;
@@ -36,7 +35,6 @@ public class BinaryHeap<Key> implements Iterable<Key> {
             pq[i+1] = keys[i];
         for (int k = n/2; k >= 1; k--)
             sink(k);
-        assert isMaxHeap();
     }
 
     public boolean isEmpty() {
@@ -53,7 +51,6 @@ public class BinaryHeap<Key> implements Iterable<Key> {
     }
 
     private void resize(int capacity) {
-        assert capacity > n;
         Key[] temp = (Key[]) new Object[capacity];
         for (int i = 1; i <= n; i++) {
             temp[i] = pq[i];
@@ -65,7 +62,6 @@ public class BinaryHeap<Key> implements Iterable<Key> {
         if (n == pq.length - 1) resize(2 * pq.length);
         pq[++n] = x;
         swim(n);
-        assert isMaxHeap();
     }
 
     public Key delMax() {
@@ -75,7 +71,6 @@ public class BinaryHeap<Key> implements Iterable<Key> {
         sink(1);
         pq[n+1] = null;
         if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
-        assert isMaxHeap();
         return max;
     }
 
